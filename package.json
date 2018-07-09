@@ -1,0 +1,54 @@
+{
+  "name": "dr_janitor-instagram",
+  "version": "1.0.0",
+  "description": "Instagram bot",
+  "main": "build/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maciejcieslar/instagrambot.git"
+  },
+  "keywords": [],
+  "author": "maciejcieslar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maciejcieslar/instagrambot/issues"
+  },
+  "homepage": "https://github.com/maciejcieslar/instagrambot#readme",
+  "scripts": {
+    "compile": "tsc && node ./build/index.js",
+    "dev": "nodemon -e ts --exec \"npm run compile-dev\"",
+    "compile-dev": "rm -rf \"./build\" && killall Chromium || echo \"No chromium instances killed\" && npm run compile"
+  },
+  "_moduleAliases": {
+    "src": "./build"
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.20",
+    "@types/dotenv": "^4.0.2",
+    "@types/lodash": "^4.14.104",
+    "@types/node-emoji": "^1.8.0",
+    "@types/node-schedule": "^1.2.2",
+    "@types/node-wit": "^4.2.2",
+    "@types/numeral": "0.0.22",
+    "@types/puppeteer": "^1.5.0",
+    "eslint": "^4.18.2",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "module-alias": "^2.0.6",
+    "node-emoji": "^1.8.1",
+    "nodemon": "^1.17.5",
+    "tslint": "^5.9.1",
+    "tslint-config-airbnb": "^5.7.0",
+    "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "dotenv": "^5.0.1",
+    "lodash": "^4.17.5",
+    "moment": "^2.21.0",
+    "node-schedule": "^1.3.0",
+    "node-wit": "^5.0.0",
+    "numeral": "^2.0.6",
+    "puppeteer": "^1.5.0"
+  }
+}
