@@ -1,5 +1,5 @@
 {
-  "name": "dr_janitor-instagram",
+  "name": "instagrambot",
   "version": "1.0.0",
   "description": "Instagram bot",
   "main": "build/index.js",

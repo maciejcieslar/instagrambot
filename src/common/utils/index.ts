@@ -2,16 +2,15 @@ const getRandomNumber = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
 function getRandomItem<T>(arr: T[]): T {
-  return arr[Math.floor(getRandomNumber(0, arr.length - 1))];
+  return arr[getRandomNumber(0, arr.length - 1)];
 }
 
-const getMiliseconds = (seconds: number): number => seconds * 1000;
+const getMilisecondsFromSeconds = (seconds: number): number => seconds * 1000;
 
-const probability = (chance: number): boolean =>
-  getRandomNumber(0, 100) <= chance;
+const probability = (chance: number): boolean => getRandomNumber(0, 100) <= chance;
 
 const waitFor = (timeout: number): Promise<void> =>
-  new Promise((resolve) => {
+  new Promise(resolve => {
     setTimeout(resolve, timeout);
   });
 
@@ -24,7 +23,7 @@ function reduceAsync<T, R>(
   return Promise.resolve(
     arr.reduce(async (prev: Promise<R>, curr: T, index: number) => {
       const result = await prev;
-      await waitFor(getMiliseconds(waitForSeconds));
+      await waitFor(getMilisecondsFromSeconds(waitForSeconds));
       return Promise.resolve(fn(result, curr, index));
     }, Promise.resolve(startValue)),
   );
@@ -32,7 +31,7 @@ function reduceAsync<T, R>(
 
 export {
   getRandomItem,
-  getMiliseconds,
+  getMilisecondsFromSeconds,
   probability,
   waitFor,
   reduceAsync,

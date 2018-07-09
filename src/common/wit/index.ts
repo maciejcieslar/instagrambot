@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import * as emoji from 'node-emoji';
 import { Intent } from 'src/common/interfaces';
 import { wit as witConfig, comments as commentsConfig } from 'src/config';
-import { getRandomItem, getRandomNumber } from 'src/common/utils';
+import { getRandomItem } from 'src/common/utils';
 
 const client = new Wit(_.pick(witConfig, ['accessToken']));
 

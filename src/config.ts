@@ -6,12 +6,12 @@ const config = {
   job: {
     hashtags: ['like4like', 'follow4follow', 'followforfollow', 'likeforlike'],
     numberOfPosts: Number(process.env.NUMBER_OF_POSTS) || 20,
-    unfollow: Number(process.env.NUMBER_OF_UNFOLLOW) || 22,
-    commentProbability: 100,
+    unfollow: Number(process.env.NUMBER_OF_UNFOLLOW) || 20,
+    commentProbability: 65,
   },
   wit: {
     accessToken: process.env.WIT_TOKEN || '',
-    expectedConfidence: 0.3,
+    expectedConfidence: 0.7,
   },
   comments: {
     happy: [

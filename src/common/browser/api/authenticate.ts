@@ -1,10 +1,7 @@
-import { Authenticate, Browser } from 'src/common/interfaces';
+import { Authenticate } from 'src/common/interfaces';
 
-const authenticate: Authenticate = function authenticate(
-  this: Browser,
-  { username, password },
-) {
-  return this.getPage('/accounts/login', async (page) => {
+const authenticate: Authenticate = function authenticate({ username, password }) {
+  return this.getPage('/accounts/login', async page => {
     const logInRedirectButtonSelector = await page.evaluate(() => {
       const { scraper } = window as any;
 
