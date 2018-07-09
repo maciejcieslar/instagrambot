@@ -15,9 +15,9 @@
   },
   "homepage": "https://github.com/maciejcieslar/instagrambot#readme",
   "scripts": {
-    "compile": "tsc && node ./build/index.js",
-    "dev": "nodemon -e ts --exec \"npm run compile-dev\"",
-    "compile-dev": "rm -rf \"./build\" && killall Chromium || echo \"No chromium instances killed\" && npm run compile"
+    "start": "tsc && node ./build/index.js",
+    "start-dev": "nodemon -e ts --exec \"npm run dev\"",
+    "dev": "rm -rf \"./build\" && killall Chromium || echo \"No chromium instances killed\" && npm run start"
   },
   "_moduleAliases": {
     "src": "./build"
