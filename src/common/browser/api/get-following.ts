@@ -6,8 +6,8 @@ const getFollowing: GetFollowing = async function getFollowing(username) {
 
     if (!buttonOfFollowingList) {
       const buttonOfFollowingListSelector = await page.evaluate(() => {
-        const { scrapper } = window as any;
-        const el = scrapper.findOne({
+        const { scraper } = window as any;
+        const el = scraper.findOne({
           selector: 'a',
           where: el => el.text().includes('following'),
         });
@@ -17,8 +17,8 @@ const getFollowing: GetFollowing = async function getFollowing(username) {
         }
 
         return el
-          .setScrapperAttr('buttonOfFollowingList', 'buttonOfFollowingList')
-          .getSelectorByScrapperAttr('buttonOfFollowingList');
+          .setscraperAttr('buttonOfFollowingList', 'buttonOfFollowingList')
+          .getSelectorByscraperAttr('buttonOfFollowingList');
       });
 
       if (buttonOfFollowingListSelector) {
@@ -30,9 +30,9 @@ const getFollowing: GetFollowing = async function getFollowing(username) {
     await page.waitFor(1000);
 
     const following = await page.evaluate(async () => {
-      const { scrapper } = window as any;
+      const { scraper } = window as any;
 
-      return scrapper
+      return scraper
         .find({
           selector: 'a[title].notranslate',
         })

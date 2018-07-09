@@ -7,9 +7,9 @@ const findPosts: FindPosts = async function findPosts(
   return this.getPage(`/explore/tags/${hashtag}`, async (page) => {
     if (numberOfPosts > 12) {
       await page.evaluate((posts) => {
-        const { scrapper } = window as any;
+        const { scraper } = window as any;
 
-        scrapper.scrollPageTimes({ times: Math.ceil((posts - 9) / 12) });
+        scraper.scrollPageTimes({ times: Math.ceil((posts - 9) / 12) });
       }, numberOfPosts);
     }
 
@@ -17,9 +17,9 @@ const findPosts: FindPosts = async function findPosts(
     await page.waitFor(1000);
 
     return page.evaluate((posts) => {
-      const { scrapper } = window as any;
+      const { scraper } = window as any;
 
-      return scrapper
+      return scraper
         .find({ selector: 'a[href^="/p/"]', count: posts + 9 })
         .slice(9)
         .map((el) => el.getAttr('href'));

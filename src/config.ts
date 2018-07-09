@@ -7,11 +7,11 @@ const config = {
     hashtags: ['like4like', 'follow4follow', 'followforfollow', 'likeforlike'],
     numberOfPosts: Number(process.env.NUMBER_OF_POSTS) || 20,
     unfollow: Number(process.env.NUMBER_OF_UNFOLLOW) || 22,
-    commentProbability: 65,
+    commentProbability: 100,
   },
   wit: {
     accessToken: process.env.WIT_TOKEN || '',
-    expectedConfidence: 65,
+    expectedConfidence: 0.3,
   },
   comments: {
     happy: [

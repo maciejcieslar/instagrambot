@@ -48,7 +48,11 @@ class FollowJob extends Job {
 
               const message = getMessageBasedOnIntent(post.postIntent);
 
+              console.log({ message });
+              console.log(post);
+
               if (probability(jobConfig.commentProbability) && message) {
+                console.log('commenting');
                 await browser.commentPost(page, post, message);
               }
             } catch (e) {

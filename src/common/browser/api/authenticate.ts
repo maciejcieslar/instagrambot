@@ -6,9 +6,9 @@ const authenticate: Authenticate = function authenticate(
 ) {
   return this.getPage('/accounts/login', async (page) => {
     const logInRedirectButtonSelector = await page.evaluate(() => {
-      const { scrapper } = window as any;
+      const { scraper } = window as any;
 
-      const logInButton = scrapper.findOne({
+      const logInButton = scraper.findOne({
         selector: 'a[href="/accounts/login"]',
       });
 
@@ -17,8 +17,8 @@ const authenticate: Authenticate = function authenticate(
       }
 
       return logInButton
-        .setScrapperAttr('logInRedirectButton', 'logInRedirectButton')
-        .getSelectorByScrapperAttr('logInRedirectButton');
+        .setscraperAttr('logInRedirectButton', 'logInRedirectButton')
+        .getSelectorByscraperAttr('logInRedirectButton');
     });
 
     if (logInRedirectButtonSelector) {
@@ -35,9 +35,9 @@ const authenticate: Authenticate = function authenticate(
     await passwordInput.type(password, { delay: 100 });
 
     const logInButtonSelector = await page.evaluate(() => {
-      const { scrapper } = window as any;
+      const { scraper } = window as any;
 
-      const logInButton = scrapper.findOneWithText({
+      const logInButton = scraper.findOneWithText({
         selector: 'button',
         text: 'Log in',
       });
@@ -47,8 +47,8 @@ const authenticate: Authenticate = function authenticate(
       }
 
       return logInButton
-        .setScrapperAttr('logInButton', 'logInButton')
-        .getSelectorByScrapperAttr('logInButton');
+        .setscraperAttr('logInButton', 'logInButton')
+        .getSelectorByscraperAttr('logInButton');
     });
 
     if (!logInButtonSelector) {

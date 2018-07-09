@@ -1,11 +1,11 @@
-const scrapper = ((window, document) => {
+const scraper = ((window, document) => {
   const capitalize = str => str.slice(0, 1).toUpperCase() + str.slice(1);
 
   const waitFor = ms => new Promise(resolve => setTimeout(() => {
     resolve();
   }, ms));
 
-  const getFormattedDataName = key => `scrapper${capitalize(key)}`;
+  const getFormattedDataName = key => `scraper${capitalize(key)}`;
 
   const getDataAttrName = (key) => {
     const reg = /[A-Z]{1}/g;
@@ -14,8 +14,8 @@ const scrapper = ((window, document) => {
     return `data-${name}`;
   };
 
-  // in dataset like { scrapperXYZ: 123 }
-  // in query 'div[data-scrapper-x-y-z="123"]';
+  // in dataset like { scraperXYZ: 123 }
+  // in query 'div[data-scraper-x-y-z="123"]';
 
   class Element {
     constructor(el) {
@@ -64,9 +64,9 @@ const scrapper = ((window, document) => {
       return this.el.tagName.toLowerCase();
     }
 
-    setScrapperAttr(key, value) {
-      const scrapperKey = getFormattedDataName(key);
-      this.el.dataset[scrapperKey] = value;
+    setscraperAttr(key, value) {
+      const scraperKey = getFormattedDataName(key);
+      this.el.dataset[scraperKey] = value;
       return this;
     }
 
@@ -79,16 +79,16 @@ const scrapper = ((window, document) => {
       return this;
     }
 
-    getScrapperAttr(key) {
+    getscraperAttr(key) {
       return this.el.dataset[getFormattedDataName(key)];
     }
 
-    getSelectorByScrapperAttr(key) {
-      const scrapperValue = this.getScrapperAttr(key);
-      const scrapperKey = getDataAttrName(getFormattedDataName(key));
+    getSelectorByscraperAttr(key) {
+      const scraperValue = this.getscraperAttr(key);
+      const scraperKey = getDataAttrName(getFormattedDataName(key));
       const tagName = this.getTag();
 
-      return `${tagName}[${scrapperKey}="${scrapperValue}"]`;
+      return `${tagName}[${scraperKey}="${scraperValue}"]`;
     }
   }
 
@@ -188,4 +188,4 @@ const scrapper = ((window, document) => {
   };
 })(window, document);
 
-window.scrapper = scrapper;
+window.scraper = scraper;

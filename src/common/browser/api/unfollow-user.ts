@@ -3,14 +3,14 @@ import { UnFollowUser } from 'src/common/interfaces';
 const unfollowUser: UnFollowUser = async function unfollowUser(username) {
   return this.getPage(`/${username}`, async (page) => {
     const unfollowButtonSelector = await page.evaluate(() => {
-      const { scrapper } = window as any;
-      let el = scrapper.findOneWithText({
+      const { scraper } = window as any;
+      let el = scraper.findOneWithText({
         selector: 'button',
         text: 'Following',
       });
 
       if (!el) {
-        el = scrapper.findOne({
+        el = scraper.findOne({
           selector: 'button._qv64e._t78yp._r9b8f._njrw0',
         });
       }
@@ -20,8 +20,8 @@ const unfollowUser: UnFollowUser = async function unfollowUser(username) {
       }
 
       return el
-        .setScrapperAttr('following', 'following')
-        .getSelectorByScrapperAttr('following');
+        .setscraperAttr('following', 'following')
+        .getSelectorByscraperAttr('following');
     });
 
     if (!unfollowButtonSelector) {
@@ -32,12 +32,12 @@ const unfollowUser: UnFollowUser = async function unfollowUser(username) {
     await unfollowButton.click();
 
     const confirmUnfollowButtonSelector = await page.evaluate(() => {
-      const { scrapper } = window as any;
+      const { scraper } = window as any;
 
-      return scrapper
+      return scraper
         .findOneWithText({ selector: 'button', text: 'Unfollow' })
-        .setScrapperAttr('confirmUnfollowButton', 'confirmUnfollowButton')
-        .getSelectorByScrapperAttr('confirmUnfollowButton');
+        .setscraperAttr('confirmUnfollowButton', 'confirmUnfollowButton')
+        .getSelectorByscraperAttr('confirmUnfollowButton');
     });
 
     (await page.$(confirmUnfollowButtonSelector)).click();

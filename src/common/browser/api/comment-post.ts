@@ -5,16 +5,8 @@ const commentPost: CommentPost = async function commentPost(page, post, message)
   await page.waitForSelector(post.commentSelector);
   await page.type(post.commentSelector, message, { delay: 200 });
 
-  const submitSelector: string = await page.evaluate(() => {
-    const { scrapper } = window as any;
+  await page.keyboard.press('Enter');
 
-    return scrapper
-      .findOneWithText({ selector: 'button[type="submit"]', text: 'Post' })
-      .setScrapperAttr('submitSelector', 'submitSelector')
-      .getSelectorByScrapperAttr('submitSelector');
-  });
-
-  await page.click(submitSelector);
   await page.waitFor(2500);
 
   return page;

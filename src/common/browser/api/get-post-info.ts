@@ -5,22 +5,22 @@ import { getIntentFromMessage } from 'src/common/wit';
 const getPostInfo: GetPostInfo = async function getPostInfo(page) {
   const { likeSelector = '', isLiked = false, unlikeSelector = '' } =
     (await page.evaluate(() => {
-      const { scrapper } = window as any;
+      const { scraper } = window as any;
 
-      const likeSpan = scrapper.findOne({
+      const likeSpan = scraper.findOne({
         selector: 'span',
         where: (el) => el.html() === 'Like',
       });
 
       if (!likeSpan) {
-        const unlikeSpan = scrapper.findOne({
+        const unlikeSpan = scraper.findOne({
           selector: 'span',
           where: (el) => el.html() === 'Unlike',
         });
         const unlikeSelector = unlikeSpan
           .parent()
-          .setScrapperAttr('unlikeHeart', 'unlikeHeart')
-          .getSelectorByScrapperAttr('unlikeHeart');
+          .setscraperAttr('unlikeHeart', 'unlikeHeart')
+          .getSelectorByscraperAttr('unlikeHeart');
 
         return {
           unlikeSelector,
@@ -31,8 +31,8 @@ const getPostInfo: GetPostInfo = async function getPostInfo(page) {
 
       const likeSelector = likeSpan
         .parent()
-        .setScrapperAttr('likeHeart', 'likeHeart')
-        .getSelectorByScrapperAttr('likeHeart');
+        .setscraperAttr('likeHeart', 'likeHeart')
+        .getSelectorByscraperAttr('likeHeart');
 
       return {
         likeSelector,
@@ -43,21 +43,21 @@ const getPostInfo: GetPostInfo = async function getPostInfo(page) {
 
   const { followSelector = '', isFollowed = false, unfollowSelector = '' } =
     (await page.evaluate(() => {
-      const { scrapper } = window as any;
+      const { scraper } = window as any;
 
-      const followButton = scrapper.findOneWithText({
+      const followButton = scraper.findOneWithText({
         selector: 'button',
         text: 'Follow',
       });
 
       if (!followButton) {
-        const unfollowButton = scrapper.findOneWithText({
+        const unfollowButton = scraper.findOneWithText({
           selector: 'button',
           text: 'Following',
         });
         const unfollowSelector = unfollowButton
-          .setScrapperAttr('unfollowButton', 'unfollowButton')
-          .getSelectorByScrapperAttr('unfollowButton');
+          .setscraperAttr('unfollowButton', 'unfollowButton')
+          .getSelectorByscraperAttr('unfollowButton');
 
         return {
           unfollowSelector,
@@ -67,8 +67,8 @@ const getPostInfo: GetPostInfo = async function getPostInfo(page) {
       }
 
       const followSelector = followButton
-        .setScrapperAttr('followButton', 'followButton')
-        .getSelectorByScrapperAttr('followButton');
+        .setscraperAttr('followButton', 'followButton')
+        .getSelectorByscraperAttr('followButton');
 
       return {
         followSelector,
@@ -79,8 +79,8 @@ const getPostInfo: GetPostInfo = async function getPostInfo(page) {
 
   const likes = numeral(
     await page.evaluate(() => {
-      const { scrapper } = window as any;
-      const el = scrapper.findOne({ selector: 'a[href$="/liked_by/"] > span' });
+      const { scraper } = window as any;
+      const el = scraper.findOne({ selector: 'a[href$="/liked_by/"] > span' });
 
       if (!el) {
         return 0;
@@ -91,8 +91,8 @@ const getPostInfo: GetPostInfo = async function getPostInfo(page) {
   ).value();
 
   const { description = '', comments = [] } = await page.evaluate(() => {
-    const { scrapper } = window as any;
-    const comments = scrapper
+    const { scraper } = window as any;
+    const comments = scraper
       .find({ selector: 'div > ul > li > span' })
       .map((el) => el.text());
 
@@ -103,19 +103,19 @@ const getPostInfo: GetPostInfo = async function getPostInfo(page) {
   });
 
   const author = await page.evaluate(() => {
-    const { scrapper } = window as any;
+    const { scraper } = window as any;
 
-    return scrapper.findOne({ selector: 'a[title].notranslate' }).text();
+    return scraper.findOne({ selector: 'a[title].notranslate' }).text();
   });
 
   const commentButtonSelector = await page.evaluate(() => {
-    const { scrapper } = window as any;
+    const { scraper } = window as any;
 
-    return scrapper
+    return scraper
       .findOneWithText({ selector: 'span', text: 'Comment' })
       .parent()
-      .setScrapperAttr('comment', 'comment')
-      .getSelectorByScrapperAttr('comment');
+      .setscraperAttr('comment', 'comment')
+      .getSelectorByscraperAttr('comment');
   });
 
   const commentSelector = 'textarea[autocorrect="off"]';

@@ -48,7 +48,7 @@ const createBrowser: CreateBrowser = async () => {
       });
 
       await page.addScriptTag({
-        path: path.join(__dirname, '../../../src/common/scrapper/scrapper.js'),
+        path: path.join(__dirname, '../../../src/common/scraper/scraper.js'),
       });
 
       result = await fn(page);

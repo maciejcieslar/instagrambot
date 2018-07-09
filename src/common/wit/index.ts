@@ -7,10 +7,7 @@ import { getRandomItem, getRandomNumber } from 'src/common/utils';
 
 const client = new Wit(_.pick(witConfig, ['accessToken']));
 
-const getIntentFromMessage = async (
-  message: string,
-  context: any = {},
-): Promise<Intent> => {
+const getIntentFromMessage = async (message: string, context: any = {}): Promise<Intent> => {
   if (!message || message.length > 280) {
     return {
       confidence: 0,
@@ -72,11 +69,10 @@ const shouldPostComment = (intent: Intent): boolean =>
   intent.confidence >= witConfig.expectedConfidence;
 
 const generateComment = (category: string): string => {
-  const randomEmojis = getRandomEmojis(getRandomNumber(0, 2), category);
+  // const randomEmojis = getRandomEmojis(getRandomNumber(0, 2), category);
+  const randomEmojis = '';
 
-  return [getRandomItem<string>(commentsConfig[category]), randomEmojis].join(
-    ' ',
-  );
+  return [getRandomItem<string>(commentsConfig[category]), randomEmojis].join(' ');
 };
 
 const getMessageBasedOnIntent = (intent: Intent): string => {
@@ -89,9 +85,4 @@ const getMessageBasedOnIntent = (intent: Intent): string => {
   return generateComment(category);
 };
 
-export {
-  client,
-  getIntentFromMessage,
-  getMessageBasedOnIntent,
-  shouldPostComment,
-};
+export { client, getIntentFromMessage, getMessageBasedOnIntent, shouldPostComment };

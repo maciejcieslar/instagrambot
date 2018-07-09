@@ -4,9 +4,9 @@ import { GetUserInfo } from 'src/common/interfaces';
 const getUserInfo: GetUserInfo = async function getUserInfo(username) {
   return this.getPage(`/${username}`, async (page) => {
     const [posts, followers, following] = await page.evaluate(() => {
-      const { scrapper } = window as any;
+      const { scraper } = window as any;
 
-      return scrapper
+      return scraper
         .find({
           selector: 'li span',
         })
