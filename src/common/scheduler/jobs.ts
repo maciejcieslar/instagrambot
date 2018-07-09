@@ -1,6 +1,7 @@
 import { Browser } from 'src/common/interfaces';
-import { reduceAsync, getRandomItem } from 'src/common/utils';
+import { reduceAsync, getRandomItem, probability } from 'src/common/utils';
 import { job as jobConfig, auth as authConfig } from 'src/config';
+import { getMessageBasedOnIntent } from 'src/common/wit';
 
 class Job {
   private ranges: number[][] = [];
@@ -30,15 +31,12 @@ class FollowJob extends Job {
   public async execute(browser: Browser) {
     try {
       const hashtag = getRandomItem(jobConfig.hashtags);
-      const postsUrls = await browser.findPosts(
-        hashtag,
-        jobConfig.numberOfPosts,
-      );
+      const postsUrls = await browser.findPosts(hashtag, jobConfig.numberOfPosts);
 
       await reduceAsync<string, void>(
         postsUrls,
         async (prev, url) =>
-          browser.getPage(url, async (page) => {
+          browser.getPage(url, async page => {
             try {
               const post = await browser.getPostInfo(page);
 
@@ -48,7 +46,11 @@ class FollowJob extends Job {
               await browser.followPost(page, post);
               console.log('followed');
 
-              // comment
+              const message = getMessageBasedOnIntent(post.postIntent);
+
+              if (probability(jobConfig.commentProbability) && message) {
+                await browser.commentPost(page, post, message);
+              }
             } catch (e) {
               console.log('Failed to like/follow.');
               console.log(e);

@@ -4,16 +4,13 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import { createBrowser } from 'src/common/browser';
-import { auth as authConfig, job as jobConfig } from 'src/config';
+import { auth as authConfig } from 'src/config';
 import { schedule, jobs } from 'src/common/scheduler';
 
 (async () => {
   try {
     const browser = await createBrowser();
     await browser.authenticate(authConfig);
-    const info = await browser.getUserInfo(authConfig.username);
-
-    console.log(info);
 
     schedule(
       [
@@ -22,9 +19,6 @@ import { schedule, jobs } from 'src/common/scheduler';
       ],
       browser,
     );
-
-    // await new UnfollowJob([]).execute();
-    // await new FollowJob([]).execute();
   } catch (e) {
     console.log(e);
   }
