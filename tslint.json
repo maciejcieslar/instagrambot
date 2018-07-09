@@ -1,0 +1,10 @@
+{
+  "extends": ["tslint-config-airbnb"],
+  "jsRules": {},
+  "rules": {
+    "align": false,
+    "ter-arrow-parens": false,
+    "prefer-array-literal": false
+  },
+  "rulesDirectory": []
+}

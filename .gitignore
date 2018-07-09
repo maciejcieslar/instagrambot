@@ -1,0 +1,6 @@
+node_modules
+.vscode
+build
+*.jpg
+.env
+.DS_Store
