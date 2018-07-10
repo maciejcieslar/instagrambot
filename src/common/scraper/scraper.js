@@ -157,7 +157,7 @@ const scraper = ((window, document) => {
     await new Array(times).fill(0).reduce(async (prev) => {
       await prev;
       scrollToPosition[direction]();
-      return waitFor(1500);
+      await waitFor(2000);
     }, Promise.resolve());
 
     return true;
