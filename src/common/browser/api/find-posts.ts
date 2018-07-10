@@ -11,7 +11,7 @@ const findPosts: FindPosts = async function findPosts(hashtag, numberOfPosts = 1
     }
 
     // waitFor render
-    await page.waitFor(10000);
+    await page.waitFor(1500);
 
     return page.evaluate(posts => {
       const { scraper } = window as any;
