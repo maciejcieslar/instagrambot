@@ -2,28 +2,7 @@ import { Authenticate } from 'src/common/interfaces';
 
 const authenticate: Authenticate = function authenticate({ username, password }) {
   return this.getPage('/accounts/login', async page => {
-    const logInRedirectButtonSelector = await page.evaluate(() => {
-      const { scraper } = window as any;
-
-      const logInButton = scraper.findOne({
-        selector: 'a[href="/accounts/login"]',
-      });
-
-      if (!logInButton) {
-        return '';
-      }
-
-      return logInButton
-        .setscraperAttr('logInRedirectButton', 'logInRedirectButton')
-        .getSelectorByscraperAttr('logInRedirectButton');
-    });
-
-    if (logInRedirectButtonSelector) {
-      await page.click(logInRedirectButtonSelector);
-      await page.waitForSelector('input[name="password"]');
-    }
-
-    await page.waitFor(3000);
+    await page.waitForSelector('input[name="username"]');
 
     const usernameInput = await page.$('input[name="username"]');
     const passwordInput = await page.$('input[name="password"]');

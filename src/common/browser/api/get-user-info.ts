@@ -14,7 +14,17 @@ const getUserInfo: GetUserInfo = async function getUserInfo(username) {
         .map(el => el.text());
     });
 
-    const isFollowed = true;
+    const isFollowed = await page.evaluate(() => {
+      const { scraper } = window as any;
+
+      const followButton = scraper.findOneWithText({ selector: 'button', text: 'Follow' });
+
+      if (followButton) {
+        return false;
+      }
+
+      return true;
+    });
 
     return {
       isFollowed,
