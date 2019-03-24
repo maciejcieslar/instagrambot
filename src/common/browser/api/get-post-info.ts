@@ -55,9 +55,17 @@ const getPostInfo: GetPostInfo = async function getPostInfo(page) {
           selector: 'button',
           text: 'Following',
         });
-        const unfollowSelector = unfollowButton
+        /**
+         * @author        Rosario Gueli <rosariogueli@hotmail.it>
+         * @description   This hotfix fixes the problem had where running this code on a page which is owned by the 
+         *                currenly logged in user, for example to like or comment this page. Since it's our page, we 
+         *                can't find a follow/unfollow button here, so the following code was generating an error and 
+         *                stopped the execution of the script. Now, the below code has been made conditional based on 
+         *                the unfollowButton selector above. If it doesn't find the follow/unfollow button, ignore it.
+         */
+        const unfollowSelector = unfollowButton ? unfollowButton
           .setscraperAttr('unfollowButton', 'unfollowButton')
-          .getSelectorByscraperAttr('unfollowButton');
+          .getSelectorByscraperAttr('unfollowButton') : '';
 
         return {
           unfollowSelector,
