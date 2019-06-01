@@ -26,8 +26,29 @@ const scraper = ((window, document) => {
       this.el = el;
     }
 
+    /**
+     * @author        Rosario Gueli <rosariogueli@hotmail.it>
+     * @description   IG has updated some of the elements structure, for example when using the comment function
+     *                the scraper could not find the button by its internal text, throwing the error: 
+     *                "Error: Evaluation failed: TypeError: Cannot read property 'parent' of null"
+     *                This is because IG have placed the text of this button inside the aria-label attribute of the span, 
+     *                the below hotfix is used in those areas where if text value was not found, gives this function 
+     *                second chance and try the element arial-label attibute:
+     *                XPath Example to find the Comment button: span[contains(@aria-label, "Comment")]
+     *                
+     */
+    aria_label(){
+      return String(this.getAttr('aria-label')).trim();
+    }
+
     text() {
-      return String(this.el.textContent).trim();
+      let res = String(this.el.textContent).trim();
+
+      if(!res){
+        res = this.aria_label();
+      }
+
+      return res;
     }
 
     get() {
@@ -35,7 +56,13 @@ const scraper = ((window, document) => {
     }
 
     html() {
-      return this.el.innerHTML;
+      let res = this.el.innerHTML;
+
+      if(!res){
+        res = this.aria_label();
+      }
+
+      return res;
     }
 
     dimensions() {
